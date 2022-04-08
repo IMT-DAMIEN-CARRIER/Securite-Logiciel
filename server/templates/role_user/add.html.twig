@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout de Role{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ajout des rôles à {{ user.login }}</h1>
+
+        {{ form_start(formAddRoleUser) }}
+
+        {{ form_widget(formAddRoleUser) }}
+
+        {{ form_end(formAddRoleUser) }}
+    </div>
+{% endblock %}

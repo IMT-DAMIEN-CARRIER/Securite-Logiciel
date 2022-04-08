@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition du document{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Editer le document : {{ document.name }}</h1>
+
+        {{ form_start(formEditDoc) }}
+
+        {{ form_widget(formEditDoc) }}
+
+        {{ form_end(formEditDoc) }}
+    </div>
+{% endblock %}

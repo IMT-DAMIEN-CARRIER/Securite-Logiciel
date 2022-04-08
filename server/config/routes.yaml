@@ -1,0 +1,11 @@
+homepage:
+    path: /
+    controller: App\Controller\HomeController::index
+
+api_login_check:
+    path: /api/login_check
+    methods: [ POST ]
+
+swagger_ui:
+    path: /docs
+    controller: api_platform.swagger.action.ui

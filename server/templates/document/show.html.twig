@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ document.name }} {% endblock %}
+
+{% block body %}
+    <div>
+        <div class="container">
+            <h1>{{ document.name }}</h1>
+            <p>{{ document.content }}</p>
+
+            <div class="row">
+                {% for permission in document.permissions %}
+                    <div class="col">
+                        <p class="text-center">{{ permission.user.login }} peut {{ permission.libellePermission.title }} sur {{ document.name }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {% set suppr = true %}
+
+        {% include 'document/_button_user.html.twig' with {'suppr': suppr} %}
+    </div>
+{% endblock %}

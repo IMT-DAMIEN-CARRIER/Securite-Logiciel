@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'un document{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer un nouveau document</h1>
+
+        {{ form_start(formNewDocument) }}
+
+        {{ form_widget(formNewDocument) }}
+
+        {{ form_end(formNewDocument) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% if app.user and app.user == document.user %}
+    <a class="btn btn-secondary" href="{{ path('document_edit', {'slug': document.slug}) }}">
+        Modifier le document
+    </a>
+
+    {% if true == suppr %}
+        <a
+                class="btn btn-danger"
+                href="{{ path('document_delete', {'slug': document.slug}) }}"
+                onclick="return confirm('Êtes vous sur de vouloir supprimer le document : {{ document.name }}')"
+        >
+            Supprimer l'annonce
+        </a>
+    {% endif %}
+{% endif %}

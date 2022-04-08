@@ -1,0 +1,14 @@
+# Analyse des risques
+
+
+| Menace                   | Probabilité  | Criticité | Solution                                                     |
+| ------------------------ | ------------ | --------- | ------------------------------------------------------------ |
+| Spoofing                 | Probable     | Grave     | Mise en place de **permissions** qui restreignent l'accès aux fichiers. De plus, les **chiffrements** mis en place permettent d'éviter ce genre d'attaque. |
+| Tampering                | Probable     | Grave     | Les mots de passe et fichiers sont transportés en utilisant **TLS** pour sécurisé la communication entre le client et le serveur. Ils sont ensuite stockés hashés et salés via **bcrypt** en base de données. Chaque fichier est stocké chiffré via **AES 256**. |
+| Injections SQL           | Peu probable | Majeure   | Vérification du contenu des paramètres, préparation des requêtes SQL pour éviter toute injection de code dans les paramètres. L'ORM Doctrine de Symfony empêche les injections SQL, même si des failles peuvent être trouvées, les plus courantes sont impossibles. |
+| Repudiation              | Probable     | Grave     | Toutes les actions effectuées par les utilisateurs sont loggées sur le serveur. Tous les fichiers sont également signés. |
+| Fuite d'information      | Peu probable | Majeure   | Les mot de passe sont hachés et salés donc même si un attaquant intercepte le mot de passe, aucune information n'est récupérable. De plus, lors de transfert de fichiers, ceux-ci sont toujours chiffrés grâve au protocole de transport TLS, donc aucune possibilité de fuite de données. |
+| Déni de service          | Peu probable | Grave     | Le serveur devrait accepter un nombre limite de requêtes venant d'une adresse IP. Si un trop grand nombre de requêtes arrivent sur le serveur, celui-ci arrête d'écouter pendant un moment, purge les requêtes qui sont arrivées afin que la file d'entrée des requêtes soit vidée. **(non implémenté)** |
+| Intrusion sur le serveur | Peu probable | Majeure   | L'utilisateur **root** est le seul à avoir accès aux fichiers de la base de données. Ainsi, les fichiers sont protégés si l'attaquant n'arrive pas à augmenter ses privilèges. De plus, des mots de passe penvent être mis en place (en plus du rootage) pour protéger l'intégrité de la base de données. De plus, les fichiers stockés sont tous chiffrés. |
+
+> Alfred : la solution au risque "Déni de service" provoque un déni de service. Quand le serveur arrête d'écouter, c'est précisément un déni de service. Donc cette solution n'est pas la bonne. La bonne rémédiation est d'utiliser un load balancer pour répartir la charge sur plusieurs serveurs, une configuration DNS avec plusieurs addresses IP (multihoming) et du bannissement d'IP automatique ou alors d'acheter une protection anti-DDoS (type Cloudflare, OVH, Imperva, etc.).

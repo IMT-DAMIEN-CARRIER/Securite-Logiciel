@@ -1,0 +1,19 @@
+{% set url = path('documents_show', {'slug': document.slug}) %}
+
+<div class="col-md-4">
+    <div class="card bg-light mb-3">
+        <div class="card-body">
+            <p class="card-title">
+                Voici le document :
+                <a href="{{ url }}">{{ document.name }}</a>
+                de {{ document.user.login }}
+            </p>
+
+            <p class="text-center">Pour voir la liste des permissions cliquer sur <strong>plus d'infos</strong>.</p>
+
+            <a class="btn btn-secondary" href="{{ url }}">Plus d'info sur : {{ document.name }}</a>
+
+            {% set suppr = false %}
+        </div>
+    </div>
+</div>
